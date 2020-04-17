@@ -29,7 +29,7 @@ class LinkConversion:
         # Création d'un texte propre équivalent au self.link
         alt_text = self.get_alt_text()
 
-        new_text =  "[[" + self.link + "|" + site + ": " + alt_text
+        new_text =  "[[" + self.link + "|" + site + ": " + alt_text + "]]"
 
         return new_text
 
