@@ -24,7 +24,10 @@ class LinkConversion:
 
     def get_new_text(self):
         # http://fing.org/?Le-succes-de-la-Montre-verte
-        site = self.link.split("/")[2]
+        try:
+            site = self.link.split("/")[2]
+        except:
+            site = "Pas de site"
 
         # Création d'un texte propre équivalent au self.link
         alt_text = self.get_alt_text()
