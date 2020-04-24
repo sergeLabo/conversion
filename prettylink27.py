@@ -2,8 +2,6 @@
 # -*- coding: UTF-8 -*-
 
 
-import os
-from sys import argv
 from bs4 import BeautifulSoup
 import urllib2
 
@@ -25,7 +23,11 @@ def prettylink(someurl):
     print(new_text)
     return new_text
 
+
 if __name__ == "__main__":
+
+    import os
+    from sys import argv
 
     error = """
 Usage:
