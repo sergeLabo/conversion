@@ -5,18 +5,36 @@
 from bs4 import BeautifulSoup
 import urllib2
 
+
 def prettylink(someurl):
 
+    # Est-ce un fichier à télécharger ?
+    fichier = False
+    for ext in [".pdf", ".zip", ".gz", ".iso"]:
+        if ext in someurl:
+            fichier = True
+
+    # Je cache toutes les erreurs
     try:
-        response = urllib2.urlopen(someurl).read()
         site = someurl.split("/")[2]
-        if ".pdf" not in someurl:
-            someurl = someurl.replace("\\", "")
+
+        # Ce n'est pas un fichier
+        if not fichier:
+            try:
+                response = urllib2.urlopen(someurl, timeout=5).read()
+            except urllib2.URLError, e:
+                response = None
+
             soup = BeautifulSoup(response, features="lxml")
             alt_text = soup.title.string
+
+        # C'est un fichier
         else:
             alt_text = someurl.split("/")[-1]
+
+        # Le texte complet
         new_text =  "[[" + someurl + "|" + site + ": " + alt_text + "]]"
+
     except:
         new_text =  "[[" + someurl + "|]]"
 
